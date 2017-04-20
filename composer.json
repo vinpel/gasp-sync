@@ -20,8 +20,8 @@
     "yiisoft/yii2-swiftmailer": "~2.0.0",
     "bower-asset/gentelella": "*@dev",
     "bower-asset/fxa-js-client": "0.1.*",
-    "npm-asset/codemirror":"*",
-    "rmrevin/yii2-fontawesome":"*",
+    "npm-asset/codemirror":"5.25.*",
+    "rmrevin/yii2-fontawesome":"2.17.*",
     "dflydev/hawk":"*"
   },
   "require-dev": {
@@ -33,13 +33,13 @@
     "codeception/verify": "~0.3.1"
   },
   "config": {
+    "fxp-asset": {
+      "installer-paths": {
+        "npm-asset-library": "vendor/npm",
+        "bower-asset-library": "vendor/bower"
+      }
+    },
     "process-timeout": 1800
-  },
-  "extra": {
-    "asset-installer-paths": {
-      "npm-asset-library": "vendor/npm",
-      "bower-asset-library": "vendor/bower"
-    }
   },
   "scripts": {
     "post-install-cmd": "php init --env=Development --overwrite=n"

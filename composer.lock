@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a34231b93279cfe6ebe5185396d2435",
+    "content-hash": "0069bf9d88793c0f63074ec99811b8d0",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -620,12 +620,12 @@
         },
         {
             "name": "npm-asset/codemirror",
-            "version": "5.25.0",
+            "version": "5.25.2",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/codemirror/-/codemirror-5.25.0.tgz",
+                "url": "https://registry.npmjs.org/codemirror/-/codemirror-5.25.2.tgz",
                 "reference": null,
-                "shasum": "78e06939c7bb41f65707b8aa9c5328111948b756"
+                "shasum": "8c77677ca9c9248d757d3a07ed1e89a8404850b7"
             },
             "require-dev": {
                 "npm-asset/blint": ">=0.5.1,<0.6.0",
@@ -680,6 +680,9 @@
                 },
                 {
                     "name": "Adam King"
+                },
+                {
+                    "name": "Adam Particka"
                 },
                 {
                     "name": "adanlobato"
@@ -1264,6 +1267,9 @@
                     "name": "flack"
                 },
                 {
+                    "name": "Florian Felten"
+                },
+                {
                     "name": "ForbesLindesay"
                 },
                 {
@@ -1457,6 +1463,9 @@
                 },
                 {
                     "name": "Jamie Hill"
+                },
+                {
+                    "name": "Jamie Morris"
                 },
                 {
                     "name": "Jan Jongboom"
@@ -1916,6 +1925,9 @@
                     "name": "McBrainy"
                 },
                 {
+                    "name": "mce2"
+                },
+                {
                     "name": "melpon"
                 },
                 {
@@ -2085,6 +2097,9 @@
                     "name": "pabloferz"
                 },
                 {
+                    "name": "Pablo Zubieta"
+                },
+                {
                     "name": "Page"
                 },
                 {
@@ -2205,6 +2220,9 @@
                     "name": "Remi Nyborg"
                 },
                 {
+                    "name": "Renaud Durlin"
+                },
+                {
                     "name": "Richard Denton"
                 },
                 {
@@ -2278,6 +2296,9 @@
                 },
                 {
                     "name": "sathyamoorthi"
+                },
+                {
+                    "name": "Saul Costa"
                 },
                 {
                     "name": "S. Chris Colbert"
@@ -2569,6 +2590,9 @@
                 },
                 {
                     "name": "Zhang Hao"
+                },
+                {
+                    "name": "Ziv"
                 },
                 {
                     "name": "zziuni"

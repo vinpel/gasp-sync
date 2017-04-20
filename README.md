@@ -1,8 +1,7 @@
 Gasp-sync reborn
 ===============================
 
-
-![Travis Build Status](https://travis-ci.org/vinpel/gasp-sync.svg?branch=master)
+[<img src="https://travis-ci.org/vinpel/gasp-sync.svg?branch=master">](https://travis-ci.org/vinpel/gasp-sync)
 
 
 A complete rewrite from a Yii 2 Advanced Project Template as a skeleton.
