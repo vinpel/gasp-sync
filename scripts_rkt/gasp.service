@@ -1,0 +1,42 @@
+[Unit]
+Description=%p : php7 
+Documentation=http://wakonda/wiki/doku.php
+# Wait for networking
+Requires=network-online.target
+After=network-online.target
+[Install]
+WantedBy=multi-user.target
+[Service]
+RestartSec=5s
+Slice=machine.slice
+
+# Env vars
+Environment=NODE1=172.16.28.66
+# Attention avant de relancer ce service il faut s'assurer que l'adresse IP est disponible
+ExecStartPre=/usr/bin/rkt gc --grace-period=0
+
+# Resource limits
+#Delegate=true
+#CPUShares=512
+#MemoryLimit=1G
+Restart=always
+#RestartSec=3
+KillMode=mixed
+ExecStart=/usr/bin/rkt run \
+    --hostname=rkt-gasp \
+    --net=default:IP=${NODE1} \
+    --set-env MYSQL_ROOT_PASSWORD=route \
+    --set-env MYSQL_USER=muser \
+    --set-env MYSQL_PASSWORD=mpwd \
+    --set-env MYSQL_DATABASE=db \
+    --set-env MYSQL_SERVER=${NODE1} \
+    --set-env USER=apache \
+    --set-env GROUP=apache \
+    --volume html,kind=host,source=/data/gaspSync/php \
+    rkt-images.oisehabitat.loc/apache-php7 \
+    --mount volume=html,target=/data/htdocs \
+    -- \
+  --- docker://mariadb \
+    --volume volume-var-lib-mysql,kind=host,source=/data/gaspSync/database \
+    --insecure-options=image \
+    -- 
