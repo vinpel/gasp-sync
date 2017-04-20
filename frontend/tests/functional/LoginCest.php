@@ -7,16 +7,16 @@ use common\fixtures\User as UserFixture;
 
 class LoginCest
 {
-    function _before(FunctionalTester $I)
-    {
-        $I->haveFixtures([
-            'user' => [
-                'class' => UserFixture::className(),
-                'dataFile' => codecept_data_dir() . 'login_data.php'
-            ]
-        ]);
-        $I->amOnRoute('site/login');
-    }
+  function _before(FunctionalTester $I)
+  {
+    $I->haveFixtures([
+      'user' => [
+        'class' => UserFixture::className(),
+        'dataFile' => codecept_data_dir() . 'login_data.php'
+      ]
+    ]);
+    $I->amOnRoute('site/login');
+  }
 
     protected function formParams($login, $password)
     {
@@ -38,7 +38,7 @@ class LoginCest
         $I->submitForm('#login-form', $this->formParams('admin', 'wrong'));
         $I->seeValidationError('Incorrect username or password.');
     }
-    
+
     public function checkValidLogin(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));

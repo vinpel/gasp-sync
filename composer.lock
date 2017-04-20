@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0069bf9d88793c0f63074ec99811b8d0",
+    "content-hash": "72937bba638d4c206f3a1a2895cd2106",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -617,6 +617,52 @@
             "description": "A Base Security Library",
             "homepage": "https://github.com/ircmaxell/PHP-SecurityLib",
             "time": "2013-04-30T18:00:34+00:00"
+        },
+        {
+            "name": "narf/hash_hkdf_compat",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/narfbg/hash_hkdf_compat.git",
+                "reference": "b6bff2acd2b88d27c89dd3e90bbbf3c1e090df28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/narfbg/hash_hkdf_compat/zipball/b6bff2acd2b88d27c89dd3e90bbbf3c1e090df28",
+                "reference": "b6bff2acd2b88d27c89dd3e90bbbf3c1e090df28",
+                "shasum": ""
+            },
+            "require": {
+                "ext-hash": "*",
+                "php": ">=5.1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.* || 5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/hash_hkdf.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Andreev",
+                    "email": "narf@devilix.net"
+                }
+            ],
+            "description": "hash_hkdf() compat package",
+            "keywords": [
+                "crypto",
+                "cryptography",
+                "hash_hkdf",
+                "hkdf"
+            ],
+            "time": "2017-02-23T21:07:38+00:00"
         },
         {
             "name": "npm-asset/codemirror",

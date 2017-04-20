@@ -7,12 +7,14 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+
 use common\models\LoginForm;
+
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
+use servertoken\models\Token;
 /**
 * Site controller
 */
@@ -21,23 +23,30 @@ class SiteController extends Controller
   /**
   * @inheritdoc
   */
-  public function behaviors()
-  {
+  public function behaviors(){
     return [
       'access' => [
         'class' => AccessControl::className(),
-        'only' => ['logout', 'signup'],
+        'except' => [ 'signup'],
         'rules' => [
           [
-            'actions' => ['signup'],
+            'actions'=>['error'],
+            'allow' => true,
+          ],
+          [
+            'actions'=>['login'],
             'allow' => true,
             'roles' => ['?'],
           ],
           [
-            'actions' => ['logout'],
+            'actions' => [
+              'view-logs','debug-browserid',
+
+              'help','index','logout'
+            ],
             'allow' => true,
             'roles' => ['@'],
-          ],
+          ]
         ],
       ],
       'verbs' => [
@@ -70,16 +79,17 @@ class SiteController extends Controller
   * @return mixed
   */
   public function actionIndex(){
-
-    return $this->render('index');
+    return $this->render('index',[
+      'publicURI'=>Yii::$app->params['publicURI']
+    ]);
   }
-
   /**
   * Logs in a user.
   *
   * @return mixed
   */
   public function actionLogin(){
+    $this->layout='login';
     if (!Yii::$app->user->isGuest) {
       return $this->goHome();
     }
@@ -104,36 +114,13 @@ class SiteController extends Controller
   }
 
   /**
-  * Displays contact page.
+  * Displays help page.
   *
   * @return mixed
   */
-  public function actionContact()
+  public function actionHelp()
   {
-    $model = new ContactForm();
-    if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-      if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-        Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-      } else {
-        Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-      }
-
-      return $this->refresh();
-    } else {
-      return $this->render('contact', [
-        'model' => $model,
-      ]);
-    }
-  }
-
-  /**
-  * Displays about page.
-  *
-  * @return mixed
-  */
-  public function actionAbout()
-  {
-    return $this->render('about');
+    return $this->render('help');
   }
 
   /**
@@ -143,6 +130,7 @@ class SiteController extends Controller
   */
   public function actionSignup()
   {
+    $this->layout='login';
     $model = new SignupForm();
     if ($model->load(Yii::$app->request->post())) {
       if ($user = $model->signup()) {
@@ -210,5 +198,38 @@ class SiteController extends Controller
   */
   public function actionViewLogs(){
     return $this->render('view-logs');
+  }
+  /**
+  * send a pre-configured user.js file based on the server config
+  */
+  public function actionUserjs(){
+    $this->layout = false;
+    $userjs= $this->render('userjs');
+    \Yii::$app->response->sendContentAsFile($userjs,'user.js')->send();
+  }
+  /**
+  * Display data for a BrowserID
+  */
+  public function actionDebugBrowserid(){
+    $ret='';
+    if (yii::$app->request->isPost){
+      $brs=yii::$app->request->post('BrowserID');
+      $BrowserID=str_replace(array( "\n", "\r",'...'), '', $brs);
+      $ret= '<pre>';
+      $ret.= $BrowserID."\n\n";
+      $myToken=new Token();
+      $tokenData=$myToken->extractTokenData($BrowserID);
+      try{
+        $res=$myToken->verifyAssertion(yii::$app->params['publicURI'],$tokenData['payload']);
+        $ret.=print_r($res,true);
+        //Fake assertion
+        //      $assertion = $myToken->createAssertion($email,\Yii::$app->params['publicURI']);
+      }
+      catch (\Exception $e) {
+        $ret.=print_r($e->getMessage(),true) ;
+      }
+      $ret.= '</pre>';
+    }
+    return $this->render('debug-browserid',['data'=>$ret]);
   }
 }

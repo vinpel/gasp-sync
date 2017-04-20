@@ -26,8 +26,8 @@ echo GridView::widget([
             $arr=json_decode($data[$nom],true);
             $ret.=$nom.' :<pre>';
             if (is_array($arr)){
-              foreach ($arr as $uneLigne){
-                $ret.=implode(str_split($uneLigne,80),"...\n")."\n";
+              foreach ($arr as $key=>$uneLigne){
+                $ret.=$key.': '.implode(str_split($uneLigne,80),"...\n")."\n";
               }
             }else {
               $ret.=$data[$nom];

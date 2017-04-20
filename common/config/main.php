@@ -5,6 +5,9 @@ return [
     'webquery' => [
       'class' => 'common\components\WebQueryLog',
     ],
+    'crypto' => [
+      'class' => 'common\components\Crypto',
+    ],
     'formatter' => [
       'dateFormat' => 'dd.MM.yyyy',
       'datetimeFormat'=>'MM/dd/yyyy HH:mm:ss',

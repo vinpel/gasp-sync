@@ -11,6 +11,7 @@ use app\models\Token;
 use app\models\FxaError;
 
 use Hawk;
+use yii;
 
 class ServeurTokenRules extends Object implements UrlRuleInterface
 {
@@ -39,17 +40,18 @@ class ServeurTokenRules extends Object implements UrlRuleInterface
 
     // **
     // **
-    $version=$token_params['fxaVersions'];//SyncVersion ProtocoleVersion ContentVersion
+    $version=yii::$app->params['fxaVersions'];//SyncVersion ProtocoleVersion ContentVersion
     $pathInfo = $request->getPathInfo();
 
     $verb = $request->getMethod();
     //\Yii::info('chemin demandé :'.$pathInfo);
     $endPointUrl=$token_params['endPointUrl'];
 
-    //http://192.168.0.49/yii/basic/web/tokenServer/1.0/sync/1.5
+
     //Create Auth Token special URL
-    if (preg_match('#^tokenServer/'.$version['SyncVersion'].'/sync/'.$version['ProtocoleVersion'].'#', $pathInfo, $matches)) {
-      return  ['token/createtoken',[]];
+    $pattern='#^'.$version['SyncVersion'].'/sync/'.$version['ProtocoleVersion'].'#';
+    if (preg_match($pattern, $pathInfo, $matches)) {
+      return  ['site/uri',[]];
     }
     //info/Collections
     if (preg_match('#^'.$endPointUrl.'/([\w]+)/info/collections#', $pathInfo, $matches)) {

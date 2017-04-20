@@ -22,7 +22,7 @@ class LandingPageCest{
   * @param FunctionalTester $I
   */
   public function loginUser(FunctionalTester $I){
-    $I->amOnPage('/token');
+    $I->amOnPage('/');
     $I->seeResponseContainsJson(array('servertoken' => 'ok'));
   }
 }

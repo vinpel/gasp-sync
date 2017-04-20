@@ -1,12 +1,15 @@
 <?php
-
 namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;
+
+
+
+/* @var $scenario \Codeception\Scenario */
 /**
 * @inheritdoc
 */
-class HomeCest
+class HelpCest
 {
   /**
   * @inheritdoc
@@ -14,12 +17,13 @@ class HomeCest
   function _before(FunctionalTester $I){
     $I->logMeIn();
   }
+
   /**
   * @inheritdoc
   */
-  public function checkOpen(FunctionalTester $I)
-  {
-    $I->amOnPage(\Yii::$app->homeUrl);
-    $I->seeLink('Dashboard');
+  public function viewHelp(FunctionalTester $I){
+    $I->amOnRoute('site/help');
+    $I->see('Help', 'title');
   }
+
 }

@@ -25,10 +25,18 @@ fi
 # Suppression de la config par defaut
 rm /etc/apache2/conf.d/conteneur.conf
 # Mise en place de la configuration SSL
+
+# Frontend sur https:443
 cp /data/htdocs/scripts_rkt/ssl.conf /etc/apache2/conf.d/ssl.conf
 sed -i -e 's/<<PORT>>/443/g' /etc/apache2/conf.d/ssl.conf
-sed -i -e 's/<<KEY_PATH>>/\/data\/htdocs\/ssl/g' /etc/apache2/conf.d/ssl.conf
+sed -i -e 's/<<KEY_PATH>>/\/data\/htdocs\/console\/runtime\/ssl/g' /etc/apache2/conf.d/ssl.conf
 sed -i -e 's/<<DOCUMENT_ROOT>>/\/data\/htdocs\/frontend\/web/g' /etc/apache2/conf.d/ssl.conf
+
+# Token server sur le port https:81
+cp /data/htdocs/scripts_rkt/ssl.conf /etc/apache2/conf.d/servertoken.conf
+sed -i -e 's/<<PORT>>/81/g' /etc/apache2/conf.d/servertoken.conf
+sed -i -e 's/<<KEY_PATH>>/\/data\/htdocs\/console\/runtime\/ssl/g' /etc/apache2/conf.d/servertoken.conf
+sed -i -e 's/<<DOCUMENT_ROOT>>/\/data\/htdocs\/servertoken\/web/g' /etc/apache2/conf.d/servertoken.conf
 
 
 #sed -i -e 's/<<DOCUMENT_ROOT>>/\/data\/htdocs\/\/web\//g' /etc/apache2/conf.d/frontend.conf

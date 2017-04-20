@@ -3,7 +3,7 @@ namespace common\urlManager;
 
 use yii\web\UrlRuleInterface;
 use yii\base\Object;
-
+use yii;
 
 use common\models\FxaError;
 use common\urlManager\ServeurTokenRules;
@@ -26,6 +26,8 @@ class AllRules extends Object implements UrlRuleInterface
   * Here we put custom Paths
   */
   public function parseRequest($manager, $request){
+    //We log all request except "site" base
+    yii::$app->webquery->log();
     $ret=ServeurTokenRules::parseRequest($manager,$request);
     if ($ret !==false){
       return $ret;
