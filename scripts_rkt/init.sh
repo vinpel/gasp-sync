@@ -2,6 +2,7 @@
 
 #apk add --no-cache git
 # Add scrypt function
+echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
 apk add --no-cache php7-libsodium@testing
 
 PATH=$PATH:/data/htdocs

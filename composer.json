@@ -24,6 +24,7 @@
     "rmrevin/yii2-fontawesome":"2.17.*",
     "dflydev/hawk":"*",
     "narf/hash_hkdf_compat": "^1.0"
+
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",
